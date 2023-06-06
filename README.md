@@ -16,4 +16,10 @@ This combination of tools ensures that your Python code is well-formatted, follo
 
 The script runs each of these libraries on every Python file, and collects the outputs in a text file. After all files have been processed, the script trims unnecessary output lines from the final report.
 
+## Bonus points
+
+Feed the log by URL (github/pastebin) into ChatGPT4 with Bing search with a prompt and have it give you a list of fixes to make.
+
+![My Image](delint.png)
+
 ## PY version coming shortly.
