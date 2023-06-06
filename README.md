@@ -22,4 +22,7 @@ Feed the log by URL (github/pastebin) into ChatGPT4 with Bing search with a prom
 
 ![My Image](delint.png)
 
+<sub>Don't mind that it labeled the code block vbnet, the rest was correct :satisfied:</sub>
+![My Image](delint2.png)
+
 ## PY version coming shortly.
