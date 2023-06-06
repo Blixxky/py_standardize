@@ -30,10 +30,8 @@ foreach ($library in $libraries) {
 
 $currentDirectory = $PWD.Path
 
-# Retrieve .py files from the current directory, excluding specific directories
-$files = Get-ChildItem -Path $currentDirectory -Recurse -Include $targetExtension -File |
-         Where-Object { $_.Directory.Name -ne 'MFB' -and $_.FullName -notlike "$currentDirectory\MFB\*" }
-
+# Retrieve .py files from the current directory
+$files = Get-ChildItem -Path $currentDirectory -Recurse -Include $targetExtension -File
 $totalFiles = $files.Count  # Calculate the total number of files
 # Update the output file path to the script's working directory
 $outputFile = Join-Path -Path $currentDirectory -ChildPath "formatted.txt"
