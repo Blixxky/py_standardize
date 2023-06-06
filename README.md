@@ -1,6 +1,6 @@
 ## Python Formatting and Linting Script
 
-This PowerShell script automates the task of running several Python code formatting and linting tools on all Python files in the current directory and its subdirectories (excluding 'MFB' directory). The output of these tools is written to report_log_trimmed.txt after junk is removed. The script installs and uses the following Python libraries:
+This PowerShell script automates the task of running several Python code formatting and linting tools on all Python files in the current directory and its subdirectories. The output of these tools is written to report_log_trimmed.txt after junk is removed. The script installs and uses the following Python libraries:
 
 1. **Black**: This is an uncompromising Python code formatter. It takes care of all the stylistic decisions of your code so you can focus on the logic. It helps maintain a consistent style in your project and makes it easier for others to read and understand your code.
 
