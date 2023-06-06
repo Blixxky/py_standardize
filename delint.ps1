@@ -30,8 +30,10 @@ foreach ($library in $libraries) {
 
 $currentDirectory = $PWD.Path
 
-# Retrieve .py files from the current directory
-$files = Get-ChildItem -Path $currentDirectory -Recurse -Include $targetExtension -File
+# Retrieve .py files from the current directory, excluding specific directories
+$files = Get-ChildItem -Path $currentDirectory -Recurse -Include $targetExtension -File |
+         Where-Object { $_.Directory.Name -ne 'MFB' -and $_.FullName -notlike "$currentDirectory\MFB\*" }
+
 $totalFiles = $files.Count  # Calculate the total number of files
 # Update the output file path to the script's working directory
 $outputFile = Join-Path -Path $currentDirectory -ChildPath "formatted.txt"
@@ -81,10 +83,12 @@ foreach ($file in $files) {
     Where-Object {
         $_ -notmatch '^Your code has been rated at|^-----+|^\*+' -and
         $_ -notmatch 'line too long' -and
-        $_ -notmatch '^Found \d+ errors in \d+ files.*' -and
+        $_ -notmatch '^Success: .*' -and
+        $_ -notmatch '^Found \d+.*' -and
         $_.Trim() -ne ''
     } |
     Set-Content -Path "report_log_trimmed.txt"
+
 
 # Delete the 'formatted.txt' file
 Remove-Item -Path $outputFile
