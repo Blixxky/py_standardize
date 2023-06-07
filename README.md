@@ -11,7 +11,7 @@ This PowerShell script automates the task of running several Python code formatt
 
 This combination of tools ensures that your Python code is well-formatted, follows Python's recommended style guide (PEP 8), is free from common programming errors, and is not cluttered with unused imports or variables. 
 
-[![Video of py_standardize delinter in action](https://github.com/Blixxky/py_standardize/raw/main/delint2.png)](https://youtu.be/ZECB4epLXTw)
+[![Video of py_standardize delinter in action](https://img.youtube.com/vi/ZECB4epLXTw/0.jpg)](https://youtu.be/ZECB4epLXTw)
 
 
 The script runs each of these libraries on every Python file, and collects the outputs in a text file. After all files have been processed, the script trims unnecessary output lines from the final report.
