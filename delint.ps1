@@ -50,25 +50,25 @@ foreach ($file in $files) {
 
     # Update overall progress bar for each file
     $overallProgress = ($currentFileIndex / $totalFiles) * 100
-    Write-Progress -Activity "Processing file $fileName" -PercentComplete $overallProgress -Status "Running commands" -CurrentOperation "Processing..."
+    $currentOperation = "Running commands"
 
     # Run each command and append output to the file
     Write-Host "Processing file $fileName"
 
-    black $filePath --quiet --line-length 100 2>&1 | Tee-Object -FilePath $outputFile -Append
-    Write-Host " - black completed"
+	autoflake --remove-all-unused-imports --remove-unused-variables --in-place $filePath 2>&1 | Tee-Object -FilePath $outputFile -Append
+	Write-Progress -Activity "Processing file $fileName" -PercentComplete $overallProgress -Status $currentOperation -CurrentOperation "Running autoflake..."
 
-    flake8 $filePath --max-line-length 100 2>&1 | Tee-Object -FilePath $outputFile -Append
-    Write-Host " - flake8 completed"
+    black $filePath --quiet 2>&1 | Tee-Object -FilePath $outputFile -Append
+	Write-Progress -Activity "Processing file $fileName" -PercentComplete $overallProgress -Status $currentOperation -CurrentOperation "Running black..."
+
+    flake8 $filePath 2>&1 | Tee-Object -FilePath $outputFile -Append
+	Write-Progress -Activity "Processing file $fileName" -PercentComplete $overallProgress -Status $currentOperation -CurrentOperation "Running flake8..."
 
     mypy $filePath 2>&1 | Tee-Object -FilePath $outputFile -Append
-    Write-Host " - mypy completed"
+    Write-Progress -Activity "Processing file $fileName" -PercentComplete $overallProgress -Status $currentOperation -CurrentOperation "Running mypy..."
 
     pylint $filePath 2>&1 | Tee-Object -FilePath $outputFile -Append
-    Write-Host " - pylint completed"
-
-    autoflake --remove-all-unused-imports --in-place $filePath 2>&1 | Tee-Object -FilePath $outputFile -Append
-    Write-Host " - autoflake completed"
+    Write-Progress -Activity "Processing file $fileName" -PercentComplete $overallProgress -Status $currentOperation -CurrentOperation "Running pylint..."
 
     # Change the current working directory back to the original directory
     Set-Location -Path $PWD
